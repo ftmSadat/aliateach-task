@@ -37,10 +37,7 @@ export default function () {
 
   function validateIsPasswordStrong(password: string) {
     if (!isPasswordStrong(password)) {
-      addErrorToValidationErrors(
-        'password',
-        'رمز عبور شما باید حداقل یک حرف بزرگ و یک حرف کوچک لاتین، حداقل یک عدد و حداقل یک کاراکتر خاص از مجموعه (at)$=+.-_؟!# را داشته باشد.'
-      )
+      addErrorToValidationErrors('password', 'رمز عبور باید شامل حروف، اعداد و نمادها باشد.')
       return false
     }
     return true
