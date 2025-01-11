@@ -2,18 +2,22 @@
 import IconsMail from '@/components/icons/IconsMail.vue'
 import IconsPassword from '@/components/icons/IconsPassword.vue'
 import useValidationErrors from '@/composables/useValidationErrors'
-import useFetch from '@/composables/useFetch'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 import { ref } from 'vue'
+
+const store = useAuthStore()
+const router = useRouter()
+const { validationErrors, findErrorMessage, validateIsInputEmpty, validateIsEmailValid, validateIsPasswordStrong } =
+  useValidationErrors()
 
 const form = ref<{ email: string; password: string }>({
   email: '',
   password: ''
 })
+const errorMsg = ref('')
 
-const { validationErrors, findErrorMessage, validateIsInputEmpty, validateIsEmailValid, validateIsPasswordStrong } =
-  useValidationErrors()
-
-const handelSignIN = () => {
+const handelSignIN = async () => {
   validationErrors.value = []
 
   emailValidate()
@@ -21,7 +25,11 @@ const handelSignIN = () => {
 
   if (validationErrors.value.length !== 0) return
 
-  signIn()
+  const result = await store.signIn(form.value.email, form.value.password)
+  if (!result.status) errorMsg.value = result.status.msg
+  router.push({
+    name: 'home'
+  })
 }
 
 const emailValidate = () => {
@@ -33,15 +41,6 @@ const passwordValidate = () => {
   validateIsInputEmpty(form.value.password, 'password')
   validateIsPasswordStrong(form.value.password)
 }
-
-const signIn = () => {
-  try {
-    const result = useFetch('/main/main/signup', 'POST', null, form.value)
-    console.log(result)
-  } catch (err) {
-    console.log(err)
-  }
-}
 </script>
 
 <template>
@@ -50,6 +49,7 @@ const signIn = () => {
       <h3 class="font-bold text-neutral-900 text-2xl">خوش آمدید</h3>
       <span class="text-neutral-500">برای ورود ایمیل و رمز عبور خود را وارد کنید </span>
     </div>
+    <p class="text-sm text-red-400" v-show="errorMsg">{{ errorMsg }}</p>
     <form class="space-y-4" @submit.prevent="handelSignIN">
       <div>
         <base-input
