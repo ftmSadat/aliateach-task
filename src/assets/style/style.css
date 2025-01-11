@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Vazir';
+    src:
+      url('@/assets/fonts/vazir/Vazir.woff2') format('woff2'),
+      url('@/assets/fonts/vazir/Vazir.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
+body {
+  @apply bg-pink-50 font-vazir mx-8;
+}
+
+.btn {
+  @apply w-full h-10 rounded-2xl
+  transition duration-150 ease-in-out
+ text-white hover:opacity-90 focus:opacity-90;
+}
