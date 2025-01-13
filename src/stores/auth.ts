@@ -1,5 +1,3 @@
-// stores/counter.js
-
 import { defineStore } from 'pinia'
 import useFetch from '@/composables/useFetch'
 import { useCookies } from 'vue3-cookies'
@@ -16,14 +14,18 @@ export const useAuthStore = defineStore('auth', {
           password
         })
 
-        console.log(result)
-        cookies.set('access-token', 'test value ')
-        
+        if (!result.ok)
+          return {
+            status: false,
+            msg: result.error.details
+          }
+
+        cookies.set('access-token', result.data.access)
+
         return {
           status: true
         }
-      
-    } catch (err: RqError) {
+      } catch (err: RqError) {
         return {
           status: false,
           msg: err.error.details
