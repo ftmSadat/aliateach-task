@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import useFetch from '@/composables/useFetch'
-import type { RqError } from '@/types'
+import type { RqErrorType } from '@/types'
 
 export const useFormStore = defineStore('form', {
   state: () => ({
@@ -27,7 +27,30 @@ export const useFormStore = defineStore('form', {
         return {
           status: true
         }
-      } catch (err: RqError) {
+      } catch (err: RqErrorType) {
+        return {
+          status: false,
+          msg: err.error.details
+        }
+      }
+    },
+
+    async getForm(id: string) {
+      try {
+        const result = await useFetch(`main/main/form?form_id=${id}`, 'GET')
+
+        if (!result.ok)
+          return {
+            status: false,
+            msg: result.error.details
+          }
+
+        console.log('kdj')
+
+        return {
+          status: true
+        }
+      } catch (err: RqErrorType) {
         return {
           status: false,
           msg: err.error.details

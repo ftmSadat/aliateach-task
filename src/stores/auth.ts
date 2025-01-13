@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import useFetch from '@/composables/useFetch'
 import { useCookies } from 'vue3-cookies'
-import type { RqError } from '@/types'
+import type { RqErrorType } from '@/types'
 
 const { cookies } = useCookies()
 
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
         return {
           status: true
         }
-      } catch (err: RqError) {
+      } catch (err: RqErrorType) {
         return {
           status: false,
           msg: err.error.details

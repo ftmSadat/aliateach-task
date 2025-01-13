@@ -1,10 +1,10 @@
 import { ref } from 'vue'
-import type { FormValidationError } from '@/types'
+import type { FormValidationErrorType } from '@/types'
 
 import { isInputEmpty, isEmailValid, isPasswordStrong } from '@/utils/validators'
 
 export default function () {
-  const validationErrors = ref<FormValidationError[]>([])
+  const validationErrors = ref<FormValidationErrorType[]>([])
 
   function findErrorMessage(property: string) {
     const error = validationErrors.value.find((error: { property: string }) => error.property === property)
