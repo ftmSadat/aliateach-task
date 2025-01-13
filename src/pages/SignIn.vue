@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import IconsMail from '@/components/icons/IconsMail.vue'
-import IconsPassword from '@/components/icons/IconsPassword.vue'
+import IconMail from '@/components/icon/IconMail.vue'
+import IconPassword from '@/components/icon/IconPassword.vue'
 import useValidationErrors from '@/composables/useValidationErrors'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
@@ -61,7 +61,7 @@ const passwordValidate = () => {
           :minlength="3"
           :maxlength="100"
         >
-          <icons-mail class="fill-neutral-700" />
+          <icon-mail class="fill-neutral-700" />
         </base-input>
         <BaseInputTextError :error="findErrorMessage('email')" />
       </div>
@@ -75,7 +75,7 @@ const passwordValidate = () => {
           :minlength="3"
           :maxlength="100"
         >
-          <icons-password class="fill-neutral-700" />
+          <icon-password class="fill-neutral-700" />
         </base-input>
         <BaseInputTextError :error="findErrorMessage('password')" />
       </div>
