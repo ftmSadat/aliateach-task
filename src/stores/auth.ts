@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', {
         if (!result.ok)
           return {
             status: false,
-            msg: result.error.details
+            msg: result.error.detail
           }
 
         cookies.set('access-token', result.data.access)
@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', {
       } catch (err: RqErrorType) {
         return {
           status: false,
-          msg: err.error.details
+          msg: err.error.detail
         }
       }
     }

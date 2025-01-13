@@ -41,7 +41,7 @@ onMounted(() => {
         <router-link :to="{ name: 'add-form' }" class="text-blue-500">ایجاد فرم</router-link>
       </div>
       <div class="grid grid-cols-3 gap-4" v-else>
-        <form-item class="h-20" v-for="item in formItems" :key="item.id" :id="item.id" />
+        <form-item class="h-56" v-for="item in formItems" :key="item.id" :id="item.id" />
       </div>
     </div>
   </section>
