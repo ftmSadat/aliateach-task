@@ -11,6 +11,9 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      meta:{
+        title: "فرم ها"
+      },
       component: home
     },
     {
@@ -21,13 +24,13 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, _, next) => {
-  if (to.name === 'sign-in' || cookies.get('access-token') !== null) next()
+// router.beforeEach((to, _, next) => {
+//   if (to.name === 'sign-in' || cookies.get('access-token') !== null) next()
 
-  next({
-    path: '/sign-in',
-    params: { nextUrl: to.fullPath }
-  })
-})
+//   next({
+//     path: '/sign-in',
+//     params: { nextUrl: to.fullPath }
+//   })
+// })
 
 export default router

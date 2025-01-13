@@ -3,10 +3,12 @@ export type FormValidationError = {
   message: string
 }
 
-export type RqError= {
+export type RqError = {
   ok: boolean
   status: number
   error: {
     detail: string
   }
 }
+
+export type FormItem = {}
