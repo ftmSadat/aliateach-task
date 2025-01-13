@@ -1,9 +1,9 @@
-export type FormValidationError = {
+export type FormValidationErrorType = {
   property: string
   message: string
 }
 
-export type RqError = {
+export type RqErrorType = {
   ok: boolean
   status: number
   error: {
@@ -11,4 +11,4 @@ export type RqError = {
   }
 }
 
-export type FormItem = {}
+export type FormItemType = {}
