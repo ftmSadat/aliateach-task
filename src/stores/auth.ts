@@ -21,6 +21,8 @@ export const useAuthStore = defineStore('auth', {
           }
 
         cookies.set('access-token', result.data.access)
+        // http-only
+        cookies.set('refresh-token', result.data.refresh, undefined, undefined, undefined, true)
 
         return {
           status: true

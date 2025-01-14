@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import useFetch from '@/composables/useFetch'
 import type { RqErrorType } from '@/types'
+import useFetch from '@/composables/useFetch'
+import { useSessionStore } from '@/stores/session'
 
 export const useFormStore = defineStore('form', {
   state: () => ({
@@ -14,7 +15,9 @@ export const useFormStore = defineStore('form', {
   actions: {
     async getForms(from: number = 1, to: number = 15) {
       try {
-        const result = await useFetch(`main/main/forms?page=${from}&per_page=${to}`, 'GET')
+        const result = await useFetch(`main/main/forms?page=${from}&per_page=${to}`, 'GET', {
+          Authorization: useSessionStore().token
+        })
 
         if (!result.ok)
           return {
@@ -37,7 +40,9 @@ export const useFormStore = defineStore('form', {
 
     async getForm(id: string) {
       try {
-        const result = await useFetch(`main/main/form?form_id=${id}`, 'GET')
+        const result = await useFetch(`main/main/form?form_id=${id}`, 'GET', {
+          Authorization: useSessionStore().token
+        })
 
         if (!result.ok)
           return {

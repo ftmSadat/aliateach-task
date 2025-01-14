@@ -26,7 +26,10 @@ const handelSignIN = async () => {
   if (validationErrors.value.length !== 0) return
 
   const result = await store.signIn(form.value.email, form.value.password)
-  if (!result.status) errorMsg.value = result.msg
+  if (!result.status) {
+    errorMsg.value = result.msg
+    return
+  }
 
   router.push({
     name: 'home'
